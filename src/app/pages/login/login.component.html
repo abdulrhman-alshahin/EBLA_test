@@ -1,0 +1,13 @@
+<mat-card class="login-card">
+  <mat-icon>poll</mat-icon>
+  <h1>polling!</h1>
+  <p>please sign in to continue</p>
+  <mat-form-field appearance="outline" *ngIf="users$ | async as users">
+    <mat-select [(value)]="selectedUser" required>
+      <mat-option *ngFor="let user of users | keyvalue" [value]="user.value">
+        {{ user.value.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="login()">login</button>
+</mat-card>

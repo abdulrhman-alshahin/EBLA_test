@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@include mat.core();
+$ebla-test-primary: mat.define-palette(mat.$indigo-palette);
+$ebla-test-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$ebla-test-warn: mat.define-palette(mat.$red-palette);
+
+$ebla-test-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $ebla-test-primary,
+      accent: $ebla-test-accent,
+      warn: $ebla-test-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($ebla-test-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+.toast-warn {
+  background-color: #f50057;
+  color: black;
+}
+.toast-success {
+  background-color: #00bcd4;
+  color: black;
+}

@@ -1,0 +1,33 @@
+<div class="container">
+  <div *ngFor="let user of users; let i = index" class="userCard">
+    <mat-card class="card">
+      <div class="img">
+        <mat-icon [style]="getColor(i)">stars</mat-icon>
+        <img
+          [src]="'../../../assets/' + user.avatarURL + '.png'"
+          alt=""
+          height="160"
+          width="160"
+        />
+      </div>
+      <div class="content">
+        <h2>{{ user.name }}</h2>
+        <div>
+          <div class="detail">
+            <h4>Answered Questions</h4>
+            <h4>{{ getAnswersCount(user) }}</h4>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="detail">
+            <h4>Created Questions</h4>
+            <h4>{{ getQuestionCount(user) }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="score">
+        <h3 class="header">score</h3>
+        <h3 class="value">{{ getScore(user) }}</h3>
+      </div>
+    </mat-card>
+  </div>
+</div>

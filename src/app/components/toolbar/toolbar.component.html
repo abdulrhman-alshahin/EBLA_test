@@ -1,0 +1,24 @@
+<mat-toolbar style="background-color: #232323; color: #fff">
+  <mat-icon>poll</mat-icon>
+  <span>Polling!</span>
+  <button mat-button [routerLink]="['/']" routerLinkActive="router-link-active">
+    home
+  </button>
+  <button
+    mat-button
+    [routerLink]="['/add']"
+    routerLinkActive="router-link-active"
+  >
+    new question
+  </button>
+  <button mat-button [routerLink]="['/leaderboard']">leaderboard</button>
+  <span class="spacer"></span>
+  <div *ngIf="user$ | async as user">
+    hello {{ user.name }}
+    <button mat-button (click)="logout()">logout</button>
+  </div>
+</mat-toolbar>
+<mat-progress-bar
+  mode="indeterminate"
+  *ngIf="loading$ | async"
+></mat-progress-bar>

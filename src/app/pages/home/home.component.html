@@ -1,0 +1,25 @@
+<div>
+  <div class="row">
+    <button
+      mat-raised-button
+      (click)="answered = true"
+      [color]="answered ? 'primary' : 'basic'"
+    >
+      Answered Questions
+    </button>
+    <button
+      mat-raised-button
+      (click)="answered = false"
+      [color]="!answered ? 'primary' : 'basic'"
+    >
+      Unanswered Questions
+    </button>
+  </div>
+  <mat-card>
+    <div *ngFor="let question of questions$ | async | keyvalue">
+      <div *ngIf="checkIfAnswered(question)">
+        <app-question-card [question]="question.value"></app-question-card>
+      </div>
+    </div>
+  </mat-card>
+</div>
