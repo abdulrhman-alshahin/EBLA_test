@@ -1,27 +1,96 @@
-# EblaTest
+# Would You Rather Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
+This is the starter code for the final assessment project for Would You Rather Project.
 
-## Development server
+The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Using the provided starter code, you'll build an Angular front end for the application.
 
-## Code scaffolding
+## Data
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+There are two types of objects stored in our database:
 
-## Build
+- Users
+- Questions
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Users
 
-## Running unit tests
+Users include:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+| Attribute | Type   | Description                                                                                                                                                                                                    |
+| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | String | The user’s unique identifier                                                                                                                                                                                   |
+| name      | String | The user’s first name and last name                                                                                                                                                                            |
+| avatarURL | String | The path to the image file                                                                                                                                                                                     |
+| questions | Array  | A list of ids of the polling questions this user created                                                                                                                                                       |
+| answers   | Object | The object's keys are the ids of each question this user answered. The value of each key is the answer the user selected. It can be either `'optionOne'` or `'optionTwo'` since each question has two options. |
 
-## Running end-to-end tests
+### Questions
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Questions include:
 
-## Further help
+| Attribute | Type   | Description                            |
+| --------- | ------ | -------------------------------------- |
+| id        | String | The question’s unique identifier       |
+| author    | String | The author’s unique identifier         |
+| timestamp | String | The time when the question was created |
+| optionOne | Object | The first voting option                |
+| optionTwo | Object | The second voting option               |
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Voting Options
+
+Voting options are attached to questions. They include:
+
+| Attribute | Type   | Description                                                        |
+| --------- | ------ | ------------------------------------------------------------------ |
+| votes     | Array  | A list that contains the id of each user who voted for that option |
+| text      | String | The text of the option                                             |
+
+Your code will talk to the database via 4 methods:
+
+- `_getUsers()`
+- `_getQuestions()`
+- `_saveQuestion(question)`
+- `_saveQuestionAnswer(object)`
+
+1. `_getUsers()` Method
+
+_Description_: Get all the existing users from the database.  
+_Return Value_: Object where the key is the user’s id and the value is the user object.
+
+2. `_getQuestions()` Method
+
+_Description_: Get all the existing questions from the database.  
+_Return Value_: Object where the key is the question’s id and the value is the question object.
+
+3. `_saveQuestion(question)` Method
+
+_Description_: Save the polling question in the database.  
+_Parameters_: Object that includes the following properties: `author`, `optionOneText`, and `optionTwoText`. More details about these properties:
+
+| Attribute     | Type   | Description                                |
+| ------------- | ------ | ------------------------------------------ |
+| author        | String | The id of the user who posted the question |
+| optionOneText | String | The text of the first option               |
+| optionTwoText | String | The text of the second option              |
+
+_Return Value_: An object that has the following properties: `id`, `author`, `optionOne`, `optionTwo`, `timestamp`. More details about these properties:
+
+| Attribute | Type   | Description                                                                                                                  |
+| --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| id        | String | The id of the question that was posted                                                                                       |
+| author    | String | The id of the user who posted the question                                                                                   |
+| optionOne | Object | The object has a text property and a votes property, which stores an array of the ids of the users who voted for that option |
+| optionTwo | Object | The object has a text property and a votes property, which stores an array of the ids of the users who voted for that option |
+| timestamp | String | The time when the question was created                                                                                       |
+
+4. `_saveQuestionAnswer(object)` Method
+
+_Description_: Save the answer to a particular polling question in the database.
+_Parameters_: Object that contains the following properties: `authedUser`, `qid`, and `answer`. More details about these properties:
+
+| Attribute  | Type   | Description                                                                             |
+| ---------- | ------ | --------------------------------------------------------------------------------------- |
+| authedUser | String | The id of the user who answered the question                                            |
+| qid        | String | The id of the question that was answered                                                |
+| answer     | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"` |
