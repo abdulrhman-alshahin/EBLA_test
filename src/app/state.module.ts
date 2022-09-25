@@ -9,6 +9,8 @@ import { UserEffects } from './state/users/user.effects';
 import { environment } from 'src/environments/environment';
 import { ToastsEffects } from './state/toastr/toastr.effects';
 import { toastrReducer } from './state/toastr/toastr.reducer';
+import { LoadingEffects } from './state/loading/loading.effects';
+import { loadingReducer } from './state/loading/loading.reducer';
 
 @NgModule({
   imports: [
@@ -16,8 +18,14 @@ import { toastrReducer } from './state/toastr/toastr.reducer';
       questions: questionReducer,
       users: usersReducer,
       toast: toastrReducer,
+      loading: loadingReducer,
     }),
-    EffectsModule.forRoot([QuestionEffects, UserEffects, ToastsEffects]),
+    EffectsModule.forRoot([
+      QuestionEffects,
+      UserEffects,
+      ToastsEffects,
+      LoadingEffects,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

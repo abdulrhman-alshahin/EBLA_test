@@ -1,7 +1,7 @@
 export interface IQuestionsState {
   questions: IQuestions;
   selectedQuestion: IQuestion | null;
-  loading: boolean;
+  // loading: boolean;
   error: string | null;
 }
 export interface IQuestions {

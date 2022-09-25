@@ -1,7 +1,6 @@
 export interface IUsersState {
   users: IUsers;
   user: IUser | null;
-  loading: boolean;
 }
 export interface IUsers {
   [key: string]: IUser;

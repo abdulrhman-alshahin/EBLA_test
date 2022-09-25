@@ -23,7 +23,6 @@ import { start } from '../toastr/toastr.actions';
 export class QuestionEffects {
   constructor(
     private actions$: Actions,
-    private store: Store<AppState>,
     private questionsService: QuestionsService
   ) {}
 

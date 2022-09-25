@@ -7,10 +7,10 @@ export const selectAllQuestions = createSelector(
   (state: IQuestionsState) => state.questions
 );
 
-export const selectLoading = createSelector(
-  (state: AppState) => state.questions,
-  (state: IQuestionsState) => state.loading
-);
+// export const selectLoading = createSelector(
+//   (state: AppState) => state.questions,
+//   (state: IQuestionsState) => state.loading
+// );
 
 export const selectSelectedQuestion = createSelector(
   (state: AppState) => state.questions,

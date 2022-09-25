@@ -7,11 +7,6 @@ export const selectAllUsers = createSelector(
   (state: IUsersState) => state.users
 );
 
-export const selectLoading = createSelector(
-  (state: AppState) => state.users,
-  (state: IUsersState) => state.loading
-);
-
 export const selectsUser = createSelector(
   (state: AppState) => state.users,
   (state: IUsersState) => state.user

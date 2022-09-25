@@ -12,10 +12,8 @@ import {
   selectQuestionSuccess,
 } from './question.actions';
 import { IQuestionsState } from 'src/app/interfaces/IQuestion';
-import { state } from '@angular/animations';
 
 export const initialQuestionsState: IQuestionsState = {
-  loading: false,
   questions: {},
   selectedQuestion: null,
   error: null,
@@ -39,17 +37,15 @@ export const questionReducer = createReducer(
     error,
   })),
 
-  on(loadQuestions, (state) => ({ ...state, loading: true })),
+  on(loadQuestions, (state) => ({ ...state })),
   on(loadQuestionsSuccess, (state, { questions }) => ({
     ...state,
-    loading: false,
     error: null,
     questions: questions,
   })),
   on(loadQuestionsFailure, (state, { error }) => ({
     ...state,
     error: error,
-    loading: false,
   })),
   on(selectQuestion, (state) => ({
     ...state,
@@ -60,11 +56,9 @@ export const questionReducer = createReducer(
   })),
   on(answerQuestion, (state) => ({
     ...state,
-    loading: true,
   })),
   on(answerQuestionSuccess, (state, { authedUser, qid, answer }) => ({
     ...state,
-    loading: false,
     questions: {
       ...state.questions,
       [qid]: {
@@ -73,6 +67,13 @@ export const questionReducer = createReducer(
           ...state.questions[qid][answer],
           votes: [...state.questions[qid][answer].votes, authedUser],
         },
+      },
+    },
+    selectedQuestion: {
+      ...state.selectedQuestion!,
+      [answer]: {
+        ...state.selectedQuestion![answer],
+        votes: [...state.selectedQuestion![answer].votes, authedUser],
       },
     },
   }))

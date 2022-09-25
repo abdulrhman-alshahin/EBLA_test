@@ -4,8 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import { IUser } from 'src/app/interfaces/IUSer';
 import { AppState } from 'src/app/state/app.state';
-import { selectLoading as questionLoading } from 'src/app/state/questions/question.selector';
-import { selectLoading as userLoading } from 'src/app/state/users/user.selector';
+import { selectLoading } from 'src/app/state/loading/loading.selector';
 import { logout } from 'src/app/state/users/user.actions';
 import { selectsUser } from 'src/app/state/users/user.selector';
 
@@ -21,7 +20,7 @@ export class ToolbarComponent implements OnInit {
   constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit(): void {
-    this.loading$ = this.store.select(questionLoading);
+    this.loading$ = this.store.select(selectLoading);
     this.user$ = this.store.select(selectsUser);
   }
   logout() {

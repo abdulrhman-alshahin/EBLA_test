@@ -6,9 +6,7 @@ import {
   login,
   logout,
 } from './user.actions';
-import { IQuestionsState } from 'src/app/interfaces/IQuestion';
 import { IUsersState } from 'src/app/interfaces/IUSer';
-import { state } from '@angular/animations';
 import {
   addQuestionSuccess,
   answerQuestion,
@@ -18,7 +16,6 @@ import {
 export const initialUsersState: IUsersState = {
   users: {},
   user: null,
-  loading: false,
 };
 
 export const usersReducer = createReducer(
@@ -29,13 +26,15 @@ export const usersReducer = createReducer(
     user: user,
   })),
   on(logout, (state) => ({ ...state, user: null })),
-  on(loadUsers, (state) => ({ ...state, users: {}, loading: true })),
+  on(loadUsers, (state) => ({ ...state, users: {} })),
   on(loadUsersSuccess, (state, { users }) => ({
     ...state,
     users: { ...users },
-    loading: false,
   })),
-  on(loadUsersFailure, (state) => ({ ...state, users: {}, loading: false })),
+  on(loadUsersFailure, (state) => ({ ...state, users: {} })),
+  on(answerQuestion, (state) => ({
+    ...state,
+  })),
   on(addQuestionSuccess, (state, question) => ({
     ...state,
     users: {
@@ -46,13 +45,8 @@ export const usersReducer = createReducer(
       },
     },
   })),
-  on(answerQuestion, (state) => ({
-    ...state,
-    loading: true,
-  })),
   on(answerQuestionSuccess, (state, { authedUser, qid, answer }) => ({
     ...state,
-    loading: false,
     users: {
       ...state.users,
       [authedUser]: {

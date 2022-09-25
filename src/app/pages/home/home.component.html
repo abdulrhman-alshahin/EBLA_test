@@ -5,14 +5,14 @@
       (click)="answered = true"
       [color]="answered ? 'primary' : 'basic'"
     >
-      Answered Questions
+      Answered Questions ({{ getAnsweredCount() }})
     </button>
     <button
       mat-raised-button
       (click)="answered = false"
       [color]="!answered ? 'primary' : 'basic'"
     >
-      Unanswered Questions
+      Unanswered Questions ({{ getUnansweredCount() }})
     </button>
   </div>
   <mat-card>

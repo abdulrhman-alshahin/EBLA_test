@@ -4,4 +4,4 @@ export const start = createAction(
   '[Toastr] start',
   props<{ message: string; warn?: boolean }>()
 );
-export const end = createAction('[Toastr] start');
+export const end = createAction('[Toastr] end');

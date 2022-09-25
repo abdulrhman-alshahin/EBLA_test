@@ -1,61 +1,63 @@
-<div class="card" *ngIf="question$ | async as question">
-  <div class="header">
-    <h2>asked by {{ question.author }}:</h2>
-  </div>
-  <div class="content" *ngIf="!result">
-    <p>complete the question</p>
-    <div>
-      <h2>would you rather</h2>
-      <mat-radio-group
-        [(ngModel)]="myAnswer"
-        color="primary"
-        aria-label="Select an option"
-      >
-        <p>
-          <mat-radio-button value="optionOne">{{
-            question.optionOne.text
-          }}</mat-radio-button>
-        </p>
-        <p>
-          <mat-radio-button value="optionTwo">{{
-            question.optionTwo.text
-          }}</mat-radio-button>
-        </p>
-      </mat-radio-group>
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="!myAnswer"
-        (click)="answerAndViewResult()"
-      >
-        view poll
-      </button>
+<ng-container *ngIf="question$ | async as question">
+  <div class="card" *ngIf="(loading$ | async) === false">
+    <div class="header">
+      <h2>asked by {{ question.author }}:</h2>
     </div>
-  </div>
+    <div class="content" *ngIf="!result">
+      <p>complete the question</p>
+      <div>
+        <h2>would you rather</h2>
+        <mat-radio-group
+          [(ngModel)]="myAnswer"
+          color="primary"
+          aria-label="Select an option"
+        >
+          <p>
+            <mat-radio-button value="optionOne">{{
+              question.optionOne.text
+            }}</mat-radio-button>
+          </p>
+          <p>
+            <mat-radio-button value="optionTwo">{{
+              question.optionTwo.text
+            }}</mat-radio-button>
+          </p>
+        </mat-radio-group>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!myAnswer"
+          (click)="answerAndViewResult()"
+        >
+          view poll
+        </button>
+      </div>
+    </div>
 
-  <div class="content" *ngIf="result">
-    <p>complete the question</p>
-    <div>
-      <h2>result</h2>
-      <mat-card style="margin-bottom: 0.5rem">
-        <h3>would you rather {{ question.optionOne.text }}</h3>
-        <app-progress-bar
-          [value]="(optionOneCount(question) / answersCount(question)) * 100"
-        ></app-progress-bar>
-        <p style="text-align: center">
-          {{ optionOneCount(question) }} out of {{ answersCount(question) }}
-        </p>
-      </mat-card>
-      <mat-card class="selected" style="margin-bottom: 0.5rem">
-        <h3>would you rather {{ question.optionTwo.text }}</h3>
-        <app-progress-bar
-          [value]="(optionTwoCount(question) / answersCount(question)) * 100"
-        ></app-progress-bar>
-        <p style="text-align: center">
-          {{ optionTwoCount(question) }} out of
-          {{ answersCount(question) }}
-        </p>
-      </mat-card>
+    <div class="content" *ngIf="result">
+      <p>complete the question</p>
+      <div>
+        <h2>result</h2>
+        <mat-card style="margin-bottom: 0.5rem">
+          <h3>would you rather {{ question.optionOne.text }}</h3>
+          <app-progress-bar
+            [value]="(optionOneCount(question) / answersCount(question)) * 100"
+          ></app-progress-bar>
+          <p style="text-align: center">
+            {{ optionOneCount(question) }} out of {{ answersCount(question) }}
+          </p>
+        </mat-card>
+        <mat-card class="selected" style="margin-bottom: 0.5rem">
+          <h3>would you rather {{ question.optionTwo.text }}</h3>
+          <app-progress-bar
+            [value]="(optionTwoCount(question) / answersCount(question)) * 100"
+          ></app-progress-bar>
+          <p style="text-align: center">
+            {{ optionTwoCount(question) }} out of
+            {{ answersCount(question) }}
+          </p>
+        </mat-card>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>

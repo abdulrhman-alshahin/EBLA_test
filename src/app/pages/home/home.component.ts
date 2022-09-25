@@ -24,12 +24,25 @@ export class HomeComponent implements OnInit {
     this.user$ = this.store.select(selectsUser);
   }
   checkIfAnswered(question: any) {
+    let answers = this.getAnswers();
+    return this.answered
+      ? answers.includes(question.key)
+      : !answers.includes(question.key);
+  }
+  getAnswers() {
     let answers: string[] = [];
     this.user$.subscribe((d) => {
       answers = Object.keys({ ...d?.answers });
     });
-    return this.answered
-      ? answers.includes(question.key)
-      : !answers.includes(question.key);
+    return answers;
+  }
+  getAnsweredCount() {
+    return this.getAnswers().length;
+  }
+  getUnansweredCount() {
+    let questions = {};
+    this.questions$.subscribe((data) => (questions = data));
+    let count = Object.keys(questions).length - this.getAnswers().length;
+    return count < 0 ? '' : count;
   }
 }
